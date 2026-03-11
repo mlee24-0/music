@@ -3,182 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Navigation</title>
+<title>导航站</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-:root{
---bg:#f5f5f7;
---card:#ffffffcc;
---text:#1d1d1f;
---accent:#0071e3;
---border:#e5e5ea;
-}
-
-@media (prefers-color-scheme: dark){
-:root{
---bg:#000;
---card:#1c1c1eaa;
---text:#f5f5f7;
---border:#3a3a3c;
-}
-}
-
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue";
+font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
 
 body{
-background:var(--bg);
-color:var(--text);
+background:#f5f7fb;
+color:#333;
 display:flex;
 }
 
-/* Sidebar */
+/* ===== Sidebar ===== */
 
 .sidebar{
-width:240px;
+width:230px;
+background:white;
 height:100vh;
 position:sticky;
 top:0;
-padding:30px 20px;
-backdrop-filter: blur(20px);
-background:var(--card);
-border-right:1px solid var(--border);
+padding:25px 15px;
+box-shadow:0 0 10px rgba(0,0,0,0.05);
+transition:0.3s;
 }
 
 .logo{
-font-size:22px;
-font-weight:600;
-margin-bottom:30px;
+font-size:20px;
+font-weight:bold;
+margin-bottom:25px;
 }
 
 .nav a{
 display:block;
-padding:10px 14px;
-border-radius:10px;
-text-decoration:none;
-color:var(--text);
+padding:10px 15px;
 margin-bottom:6px;
-transition:0.25s;
+border-radius:8px;
+text-decoration:none;
+color:#555;
+transition:0.2s;
 }
 
 .nav a:hover{
-background:rgba(0,0,0,0.05);
+background:#f0f3ff;
+color:#4a6cf7;
 }
 
 .nav a.active{
-background:var(--accent);
+background:#4a6cf7;
 color:white;
 }
 
-/* Content */
+/* ===== Content ===== */
 
 .content{
 flex:1;
-padding:40px 60px;
+padding:30px 40px;
 }
 
-/* Search */
+/* ===== Search ===== */
 
-.search{
+.search-bar{
 display:flex;
 gap:10px;
-margin-bottom:40px;
+margin-bottom:35px;
+align-items:center;
 }
 
 .engine{
-border:1px solid var(--border);
-border-radius:10px;
-padding:8px;
-background:var(--card);
+padding:8px 10px;
+border-radius:6px;
+border:1px solid #ddd;
+background:white;
 }
 
-.search input{
+.search-input{
 flex:1;
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px 14px;
-background:var(--card);
+padding:10px 12px;
+border-radius:6px;
+border:1px solid #ddd;
 outline:none;
 }
 
-.search button{
-background:var(--accent);
+.search-btn{
+padding:10px 16px;
+background:#4a6cf7;
 border:none;
-padding:12px 20px;
-border-radius:12px;
+border-radius:6px;
 color:white;
 cursor:pointer;
 }
 
-/* Section */
+/* ===== Section ===== */
 
 .section{
-margin-bottom:70px;
+margin-bottom:60px;
 }
 
-.section h2{
-font-size:28px;
-margin-bottom:20px;
+.section-title{
+font-size:24px;
+font-weight:600;
+margin-bottom:15px;
 }
 
-/* Tabs */
+/* ===== Tabs ===== */
 
 .tabs{
 display:flex;
 gap:10px;
 margin-bottom:20px;
+flex-wrap:wrap;
 }
 
 .tab{
-padding:6px 14px;
-border-radius:20px;
-background:#e9e9ec;
+padding:6px 12px;
+border-radius:6px;
 cursor:pointer;
-font-size:14px;
+background:#eef1ff;
 }
 
 .tab.active{
-background:var(--accent);
+background:#4a6cf7;
 color:white;
 }
 
-/* Cards */
+/* ===== Cards ===== */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+gap:18px;
 }
 
 .card{
+background:white;
+padding:15px;
+border-radius:12px;
 display:flex;
-gap:14px;
-padding:18px;
-border-radius:18px;
-background:var(--card);
-backdrop-filter:blur(20px);
-border:1px solid var(--border);
-text-decoration:none;
-color:var(--text);
+gap:12px;
+cursor:pointer;
 transition:0.25s;
+text-decoration:none;
+color:inherit;
+box-shadow:0 2px 6px rgba(0,0,0,0.04);
 }
 
 .card:hover{
-transform:translateY(-6px);
-box-shadow:0 15px 35px rgba(0,0,0,0.1);
+transform:translateY(-4px);
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .card i{
 font-size:22px;
-color:var(--accent);
+color:#4a6cf7;
+width:26px;
 }
 
 .card-title{
@@ -187,26 +172,31 @@ font-weight:600;
 
 .card-desc{
 font-size:13px;
-opacity:0.6;
+color:#777;
 margin-top:4px;
 }
 
-/* Mobile */
+/* ===== Hamburger ===== */
 
 .hamburger{
 display:none;
 font-size:22px;
-margin-bottom:20px;
 cursor:pointer;
+margin-bottom:15px;
 }
 
+/* ===== Responsive ===== */
+
 @media(max-width:900px){
+
+body{
+flex-direction:column;
+}
 
 .sidebar{
 position:fixed;
 left:-260px;
 z-index:1000;
-transition:0.3s;
 }
 
 .sidebar.show{
@@ -230,12 +220,12 @@ display:block;
 
 <div class="sidebar" id="sidebar">
 
-<div class="logo"> Navigation</div>
+<div class="logo">导航站</div>
 
 <div class="nav">
-<a href="#dev">开发</a>
-<a href="#design">设计</a>
-<a href="#learn">学习</a>
+<a href="#dev">开发工具</a>
+<a href="#design">设计资源</a>
+<a href="#learn">学习平台</a>
 </div>
 
 </div>
@@ -246,30 +236,28 @@ display:block;
 <i class="fa fa-bars"></i>
 </div>
 
-<!-- Search -->
-
-<div class="search">
+<!-- 搜索 -->
+<div class="search-bar">
 
 <select class="engine" id="engine">
+<option value="https://www.baidu.com/s?wd=">百度</option>
 <option value="https://www.google.com/search?q=">Google</option>
 <option value="https://www.bing.com/search?q=">Bing</option>
-<option value="https://www.baidu.com/s?wd=">Baidu</option>
 </select>
 
-<input id="searchInput" placeholder="Search anything...">
+<input class="search-input" id="searchInput" placeholder="搜索内容">
 
-<button onclick="search()">Search</button>
+<button class="search-btn" onclick="search()">搜索</button>
 
 </div>
 
-<!-- Section Dev -->
+<!-- 开发 -->
+<section class="section" id="dev">
 
-<div class="section" id="dev">
-
-<h2>开发工具</h2>
+<div class="section-title">开发工具</div>
 
 <div class="tabs">
-<div class="tab active" data-tab="dev1">工具</div>
+<div class="tab active" data-tab="dev1">常用</div>
 <div class="tab" data-tab="dev2">AI</div>
 </div>
 
@@ -279,7 +267,7 @@ display:block;
 <i class="fab fa-github"></i>
 <div>
 <div class="card-title">GitHub</div>
-<div class="card-desc">代码托管平台</div>
+<div class="card-desc">全球最大代码托管平台</div>
 </div>
 </a>
 
@@ -287,7 +275,7 @@ display:block;
 <i class="fa fa-code"></i>
 <div>
 <div class="card-title">CodePen</div>
-<div class="card-desc">在线前端编辑器</div>
+<div class="card-desc">前端在线代码实验场</div>
 </div>
 </a>
 
@@ -299,67 +287,86 @@ display:block;
 <i class="fa fa-robot"></i>
 <div>
 <div class="card-title">ChatGPT</div>
-<div class="card-desc">AI 助手</div>
+<div class="card-desc">AI 编程助手</div>
 </div>
 </a>
 
-</div>
-
-</div>
-
-<!-- Section Design -->
-
-<div class="section" id="design">
-
-<h2>设计资源</h2>
-
-<div class="cards">
-
-<a class="card" href="https://unsplash.com" target="_blank">
-<i class="fa fa-image"></i>
+<a class="card" href="https://cursor.sh" target="_blank">
+<i class="fa fa-terminal"></i>
 <div>
-<div class="card-title">Unsplash</div>
-<div class="card-desc">免费图片</div>
+<div class="card-title">Cursor</div>
+<div class="card-desc">AI IDE 编辑器</div>
 </div>
 </a>
+
+</div>
+
+</section>
+
+<!-- 设计 -->
+<section class="section" id="design">
+
+<div class="section-title">设计资源</div>
+
+<div class="tabs">
+<div class="tab active" data-tab="design1">图标</div>
+<div class="tab" data-tab="design2">图片</div>
+</div>
+
+<div class="cards tab-content" id="design1">
 
 <a class="card" href="https://fontawesome.com" target="_blank">
 <i class="fa fa-icons"></i>
 <div>
 <div class="card-title">FontAwesome</div>
-<div class="card-desc">图标库</div>
+<div class="card-desc">流行图标库</div>
 </div>
 </a>
 
 </div>
 
+<div class="cards tab-content" id="design2" style="display:none">
+
+<a class="card" href="https://unsplash.com" target="_blank">
+<i class="fa fa-image"></i>
+<div>
+<div class="card-title">Unsplash</div>
+<div class="card-desc">免费高清图片</div>
+</div>
+</a>
+
 </div>
 
-<!-- Section Learn -->
+</section>
 
-<div class="section" id="learn">
+<!-- 学习 -->
+<section class="section" id="learn">
 
-<h2>学习</h2>
+<div class="section-title">学习平台</div>
 
-<div class="cards">
+<div class="tabs">
+<div class="tab active" data-tab="learn1">编程</div>
+</div>
+
+<div class="cards tab-content" id="learn1">
 
 <a class="card" href="https://developer.mozilla.org" target="_blank">
 <i class="fa fa-book"></i>
 <div>
 <div class="card-title">MDN</div>
-<div class="card-desc">Web开发文档</div>
+<div class="card-desc">Web开发权威文档</div>
 </div>
 </a>
 
 </div>
 
-</div>
+</section>
 
 </div>
 
 <script>
 
-/* Search */
+/* ===== 搜索 ===== */
 
 function search(){
 
@@ -372,13 +379,13 @@ window.open(engine+encodeURIComponent(q))
 
 }
 
-/* Tabs */
+/* ===== Tabs ===== */
 
 document.querySelectorAll(".tab").forEach(tab=>{
 
 tab.onclick=()=>{
 
-let parent=tab.closest(".section")
+let parent=tab.parentElement.parentElement
 
 parent.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
 tab.classList.add("active")
@@ -391,15 +398,17 @@ document.getElementById(tab.dataset.tab).style.display="grid"
 
 })
 
-/* Mobile menu */
+/* ===== Sidebar Toggle ===== */
+
+const sidebar=document.getElementById("sidebar")
 
 document.getElementById("menuBtn").onclick=()=>{
 
-document.getElementById("sidebar").classList.toggle("show")
+sidebar.classList.toggle("show")
 
 }
 
-/* Scroll spy */
+/* ===== Scroll Spy ===== */
 
 const sections=document.querySelectorAll(".section")
 const navLinks=document.querySelectorAll(".nav a")
@@ -413,7 +422,7 @@ sections.forEach(section=>{
 const top=section.offsetTop-120
 
 if(scrollY>=top){
-current=section.id
+current=section.getAttribute("id")
 }
 
 })
@@ -430,18 +439,21 @@ link.classList.add("active")
 
 })
 
-/* Smooth scroll */
+/* ===== Smooth Scroll ===== */
 
 navLinks.forEach(link=>{
 
-link.onclick=e=>{
+link.addEventListener("click",function(e){
 
 e.preventDefault()
 
-document.querySelector(link.getAttribute("href"))
-.scrollIntoView({behavior:"smooth"})
+let target=document.querySelector(this.getAttribute("href"))
 
-}
+target.scrollIntoView({
+behavior:"smooth"
+})
+
+})
 
 })
 
