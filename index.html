@@ -1,1 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Navigation</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+:root{
+--bg:#f5f5f7;
+--card:#ffffffcc;
+--text:#1d1d1f;
+--accent:#0071e3;
+--border:#e5e5ea;
+}
+
+@media (prefers-color-scheme: dark){
+:root{
+--bg:#000;
+--card:#1c1c1eaa;
+--text:#f5f5f7;
+--border:#3a3a3c;
+}
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue";
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+display:flex;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:240px;
+height:100vh;
+position:sticky;
+top:0;
+padding:30px 20px;
+backdrop-filter: blur(20px);
+background:var(--card);
+border-right:1px solid var(--border);
+}
+
+.logo{
+font-size:22px;
+font-weight:600;
+margin-bottom:30px;
+}
+
+.nav a{
+display:block;
+padding:10px 14px;
+border-radius:10px;
+text-decoration:none;
+color:var(--text);
+margin-bottom:6px;
+transition:0.25s;
+}
+
+.nav a:hover{
+background:rgba(0,0,0,0.05);
+}
+
+.nav a.active{
+background:var(--accent);
+color:white;
+}
+
+/* Content */
+
+.content{
+flex:1;
+padding:40px 60px;
+}
+
+/* Search */
+
+.search{
+display:flex;
+gap:10px;
+margin-bottom:40px;
+}
+
+.engine{
+border:1px solid var(--border);
+border-radius:10px;
+padding:8px;
+background:var(--card);
+}
+
+.search input{
+flex:1;
+border:1px solid var(--border);
+border-radius:12px;
+padding:12px 14px;
+background:var(--card);
+outline:none;
+}
+
+.search button{
+background:var(--accent);
+border:none;
+padding:12px 20px;
+border-radius:12px;
+color:white;
+cursor:pointer;
+}
+
+/* Section */
+
+.section{
+margin-bottom:70px;
+}
+
+.section h2{
+font-size:28px;
+margin-bottom:20px;
+}
+
+/* Tabs */
+
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+.tab{
+padding:6px 14px;
+border-radius:20px;
+background:#e9e9ec;
+cursor:pointer;
+font-size:14px;
+}
+
+.tab.active{
+background:var(--accent);
+color:white;
+}
+
+/* Cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:20px;
+}
+
+.card{
+display:flex;
+gap:14px;
+padding:18px;
+border-radius:18px;
+background:var(--card);
+backdrop-filter:blur(20px);
+border:1px solid var(--border);
+text-decoration:none;
+color:var(--text);
+transition:0.25s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 35px rgba(0,0,0,0.1);
+}
+
+.card i{
+font-size:22px;
+color:var(--accent);
+}
+
+.card-title{
+font-weight:600;
+}
+
+.card-desc{
+font-size:13px;
+opacity:0.6;
+margin-top:4px;
+}
+
+/* Mobile */
+
+.hamburger{
+display:none;
+font-size:22px;
+margin-bottom:20px;
+cursor:pointer;
+}
+
+@media(max-width:900px){
+
+.sidebar{
+position:fixed;
+left:-260px;
+z-index:1000;
+transition:0.3s;
+}
+
+.sidebar.show{
+left:0;
+}
+
+.content{
+padding:20px;
+}
+
+.hamburger{
+display:block;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar" id="sidebar">
+
+<div class="logo"> Navigation</div>
+
+<div class="nav">
+<a href="#dev">开发</a>
+<a href="#design">设计</a>
+<a href="#learn">学习</a>
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="hamburger" id="menuBtn">
+<i class="fa fa-bars"></i>
+</div>
+
+<!-- Search -->
+
+<div class="search">
+
+<select class="engine" id="engine">
+<option value="https://www.google.com/search?q=">Google</option>
+<option value="https://www.bing.com/search?q=">Bing</option>
+<option value="https://www.baidu.com/s?wd=">Baidu</option>
+</select>
+
+<input id="searchInput" placeholder="Search anything...">
+
+<button onclick="search()">Search</button>
+
+</div>
+
+<!-- Section Dev -->
+
+<div class="section" id="dev">
+
+<h2>开发工具</h2>
+
+<div class="tabs">
+<div class="tab active" data-tab="dev1">工具</div>
+<div class="tab" data-tab="dev2">AI</div>
+</div>
+
+<div class="cards tab-content" id="dev1">
+
+<a class="card" href="https://github.com" target="_blank">
+<i class="fab fa-github"></i>
+<div>
+<div class="card-title">GitHub</div>
+<div class="card-desc">代码托管平台</div>
+</div>
+</a>
+
+<a class="card" href="https://codepen.io" target="_blank">
+<i class="fa fa-code"></i>
+<div>
+<div class="card-title">CodePen</div>
+<div class="card-desc">在线前端编辑器</div>
+</div>
+</a>
+
+</div>
+
+<div class="cards tab-content" id="dev2" style="display:none">
+
+<a class="card" href="https://chat.openai.com" target="_blank">
+<i class="fa fa-robot"></i>
+<div>
+<div class="card-title">ChatGPT</div>
+<div class="card-desc">AI 助手</div>
+</div>
+</a>
+
+</div>
+
+</div>
+
+<!-- Section Design -->
+
+<div class="section" id="design">
+
+<h2>设计资源</h2>
+
+<div class="cards">
+
+<a class="card" href="https://unsplash.com" target="_blank">
+<i class="fa fa-image"></i>
+<div>
+<div class="card-title">Unsplash</div>
+<div class="card-desc">免费图片</div>
+</div>
+</a>
+
+<a class="card" href="https://fontawesome.com" target="_blank">
+<i class="fa fa-icons"></i>
+<div>
+<div class="card-title">FontAwesome</div>
+<div class="card-desc">图标库</div>
+</div>
+</a>
+
+</div>
+
+</div>
+
+<!-- Section Learn -->
+
+<div class="section" id="learn">
+
+<h2>学习</h2>
+
+<div class="cards">
+
+<a class="card" href="https://developer.mozilla.org" target="_blank">
+<i class="fa fa-book"></i>
+<div>
+<div class="card-title">MDN</div>
+<div class="card-desc">Web开发文档</div>
+</div>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* Search */
+
+function search(){
+
+let engine=document.getElementById("engine").value
+let q=document.getElementById("searchInput").value
+
+if(q){
+window.open(engine+encodeURIComponent(q))
+}
+
+}
+
+/* Tabs */
+
+document.querySelectorAll(".tab").forEach(tab=>{
+
+tab.onclick=()=>{
+
+let parent=tab.closest(".section")
+
+parent.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
+tab.classList.add("active")
+
+parent.querySelectorAll(".tab-content").forEach(c=>c.style.display="none")
+
+document.getElementById(tab.dataset.tab).style.display="grid"
+
+}
+
+})
+
+/* Mobile menu */
+
+document.getElementById("menuBtn").onclick=()=>{
+
+document.getElementById("sidebar").classList.toggle("show")
+
+}
+
+/* Scroll spy */
+
+const sections=document.querySelectorAll(".section")
+const navLinks=document.querySelectorAll(".nav a")
+
+window.addEventListener("scroll",()=>{
+
+let current=""
+
+sections.forEach(section=>{
+
+const top=section.offsetTop-120
+
+if(scrollY>=top){
+current=section.id
+}
+
+})
+
+navLinks.forEach(link=>{
+
+link.classList.remove("active")
+
+if(link.getAttribute("href")==="#"+current){
+link.classList.add("active")
+}
+
+})
+
+})
+
+/* Smooth scroll */
+
+navLinks.forEach(link=>{
+
+link.onclick=e=>{
+
+e.preventDefault()
+
+document.querySelector(link.getAttribute("href"))
+.scrollIntoView({behavior:"smooth"})
+
+}
+
+})
+
+</script>
+
+</body>
+</html>
