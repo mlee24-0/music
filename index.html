@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>导航站</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>电子塔罗</title>
 
 <style>
 
@@ -13,449 +12,277 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI";
 }
 
 body{
-background:#f5f7fb;
-color:#333;
-display:flex;
-}
-
-/* ===== Sidebar ===== */
-
-.sidebar{
-width:230px;
-background:white;
+background:linear-gradient(180deg,#0f0c29,#302b63,#24243e);
+color:white;
 height:100vh;
-position:sticky;
-top:0;
-padding:25px 15px;
-box-shadow:0 0 10px rgba(0,0,0,0.05);
-transition:0.3s;
-}
-
-.logo{
-font-size:20px;
-font-weight:bold;
-margin-bottom:25px;
-}
-
-.nav a{
-display:block;
-padding:10px 15px;
-margin-bottom:6px;
-border-radius:8px;
-text-decoration:none;
-color:#555;
-transition:0.2s;
-}
-
-.nav a:hover{
-background:#f0f3ff;
-color:#4a6cf7;
-}
-
-.nav a.active{
-background:#4a6cf7;
-color:white;
-}
-
-/* ===== Content ===== */
-
-.content{
-flex:1;
-padding:30px 40px;
-}
-
-/* ===== Search ===== */
-
-.search-bar{
 display:flex;
-gap:10px;
-margin-bottom:35px;
+flex-direction:column;
 align-items:center;
+justify-content:center;
+text-align:center;
 }
 
-.engine{
-padding:8px 10px;
-border-radius:6px;
-border:1px solid #ddd;
-background:white;
+/* 标题 */
+
+h1{
+margin-bottom:10px;
+font-size:32px;
 }
 
-.search-input{
-flex:1;
-padding:10px 12px;
-border-radius:6px;
-border:1px solid #ddd;
-outline:none;
+p{
+opacity:0.7;
+margin-bottom:30px;
 }
 
-.search-btn{
-padding:10px 16px;
-background:#4a6cf7;
+/* 洗牌按钮 */
+
+button{
+padding:12px 24px;
 border:none;
-border-radius:6px;
+border-radius:30px;
+background:#8e44ff;
 color:white;
+font-size:16px;
 cursor:pointer;
+margin-bottom:30px;
 }
 
-/* ===== Section ===== */
-
-.section{
-margin-bottom:60px;
-}
-
-.section-title{
-font-size:24px;
-font-weight:600;
-margin-bottom:15px;
-}
-
-/* ===== Tabs ===== */
-
-.tabs{
-display:flex;
-gap:10px;
-margin-bottom:20px;
-flex-wrap:wrap;
-}
-
-.tab{
-padding:6px 12px;
-border-radius:6px;
-cursor:pointer;
-background:#eef1ff;
-}
-
-.tab.active{
-background:#4a6cf7;
-color:white;
-}
-
-/* ===== Cards ===== */
+/* 卡牌区域 */
 
 .cards{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-gap:18px;
+display:flex;
+gap:30px;
+perspective:1000px;
 }
+
+/* 卡牌 */
 
 .card{
-background:white;
-padding:15px;
+width:120px;
+height:200px;
+position:relative;
+transform-style:preserve-3d;
+transition:transform 0.8s;
+cursor:pointer;
+}
+
+.card.flip{
+transform:rotateY(180deg);
+}
+
+/* 卡牌面 */
+
+.face{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
 border-radius:12px;
 display:flex;
-gap:12px;
-cursor:pointer;
-transition:0.25s;
-text-decoration:none;
-color:inherit;
-box-shadow:0 2px 6px rgba(0,0,0,0.04);
+align-items:center;
+justify-content:center;
+padding:10px;
 }
 
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
+/* 背面 */
+
+.back{
+background:linear-gradient(135deg,#6a11cb,#2575fc);
+font-size:20px;
 }
 
-.card i{
-font-size:22px;
-color:#4a6cf7;
-width:26px;
-}
+/* 正面 */
 
-.card-title{
-font-weight:600;
-}
-
-.card-desc{
-font-size:13px;
-color:#777;
-margin-top:4px;
-}
-
-/* ===== Hamburger ===== */
-
-.hamburger{
-display:none;
-font-size:22px;
-cursor:pointer;
-margin-bottom:15px;
-}
-
-/* ===== Responsive ===== */
-
-@media(max-width:900px){
-
-body{
+.front{
+background:white;
+color:black;
+transform:rotateY(180deg);
 flex-direction:column;
 }
 
-.sidebar{
-position:fixed;
-left:-260px;
-z-index:1000;
+/* 解读 */
+
+.reading{
+margin-top:30px;
+max-width:500px;
+font-size:15px;
+line-height:1.6;
+opacity:0.9;
 }
 
-.sidebar.show{
-left:0;
+/* 洗牌动画 */
+
+.shuffle{
+animation:shuffle 0.6s infinite alternate;
 }
 
-.content{
-padding:20px;
+@keyframes shuffle{
+
+from{
+transform:translateY(-10px) rotate(-5deg);
 }
 
-.hamburger{
-display:block;
+to{
+transform:translateY(10px) rotate(5deg);
+}
+
+}
+
+@media(max-width:600px){
+
+.cards{
+gap:15px;
+}
+
+.card{
+width:90px;
+height:150px;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="sidebar" id="sidebar">
+<h1>🔮 塔罗占卜</h1>
+<p>点击洗牌，然后翻开三张牌</p>
 
-<div class="logo">导航站</div>
+<button onclick="shuffle()">洗牌</button>
 
-<div class="nav">
-<a href="#dev">开发工具</a>
-<a href="#design">设计资源</a>
-<a href="#learn">学习平台</a>
-</div>
+<div class="cards" id="cards"></div>
 
-</div>
-
-<div class="content">
-
-<div class="hamburger" id="menuBtn">
-<i class="fa fa-bars"></i>
-</div>
-
-<!-- 搜索 -->
-<div class="search-bar">
-
-<select class="engine" id="engine">
-<option value="https://www.baidu.com/s?wd=">百度</option>
-<option value="https://www.google.com/search?q=">Google</option>
-<option value="https://www.bing.com/search?q=">Bing</option>
-</select>
-
-<input class="search-input" id="searchInput" placeholder="搜索内容">
-
-<button class="search-btn" onclick="search()">搜索</button>
-
-</div>
-
-<!-- 开发 -->
-<section class="section" id="dev">
-
-<div class="section-title">开发工具</div>
-
-<div class="tabs">
-<div class="tab active" data-tab="dev1">常用</div>
-<div class="tab" data-tab="dev2">AI</div>
-</div>
-
-<div class="cards tab-content" id="dev1">
-
-<a class="card" href="https://github.com" target="_blank">
-<i class="fab fa-github"></i>
-<div>
-<div class="card-title">GitHub</div>
-<div class="card-desc">全球最大代码托管平台</div>
-</div>
-</a>
-
-<a class="card" href="https://codepen.io" target="_blank">
-<i class="fa fa-code"></i>
-<div>
-<div class="card-title">CodePen</div>
-<div class="card-desc">前端在线代码实验场</div>
-</div>
-</a>
-
-</div>
-
-<div class="cards tab-content" id="dev2" style="display:none">
-
-<a class="card" href="https://chat.openai.com" target="_blank">
-<i class="fa fa-robot"></i>
-<div>
-<div class="card-title">ChatGPT</div>
-<div class="card-desc">AI 编程助手</div>
-</div>
-</a>
-
-<a class="card" href="https://cursor.sh" target="_blank">
-<i class="fa fa-terminal"></i>
-<div>
-<div class="card-title">Cursor</div>
-<div class="card-desc">AI IDE 编辑器</div>
-</div>
-</a>
-
-</div>
-
-</section>
-
-<!-- 设计 -->
-<section class="section" id="design">
-
-<div class="section-title">设计资源</div>
-
-<div class="tabs">
-<div class="tab active" data-tab="design1">图标</div>
-<div class="tab" data-tab="design2">图片</div>
-</div>
-
-<div class="cards tab-content" id="design1">
-
-<a class="card" href="https://fontawesome.com" target="_blank">
-<i class="fa fa-icons"></i>
-<div>
-<div class="card-title">FontAwesome</div>
-<div class="card-desc">流行图标库</div>
-</div>
-</a>
-
-</div>
-
-<div class="cards tab-content" id="design2" style="display:none">
-
-<a class="card" href="https://unsplash.com" target="_blank">
-<i class="fa fa-image"></i>
-<div>
-<div class="card-title">Unsplash</div>
-<div class="card-desc">免费高清图片</div>
-</div>
-</a>
-
-</div>
-
-</section>
-
-<!-- 学习 -->
-<section class="section" id="learn">
-
-<div class="section-title">学习平台</div>
-
-<div class="tabs">
-<div class="tab active" data-tab="learn1">编程</div>
-</div>
-
-<div class="cards tab-content" id="learn1">
-
-<a class="card" href="https://developer.mozilla.org" target="_blank">
-<i class="fa fa-book"></i>
-<div>
-<div class="card-title">MDN</div>
-<div class="card-desc">Web开发权威文档</div>
-</div>
-</a>
-
-</div>
-
-</section>
-
-</div>
+<div class="reading" id="reading"></div>
 
 <script>
 
-/* ===== 搜索 ===== */
+/* 塔罗牌数据 */
 
-function search(){
+const tarot=[
 
-let engine=document.getElementById("engine").value
-let q=document.getElementById("searchInput").value
+{name:"愚者",meaning:"新的开始、冒险、自由精神"},
+{name:"魔术师",meaning:"创造力、行动力、掌控力"},
+{name:"女祭司",meaning:"直觉、神秘、潜意识"},
+{name:"女皇",meaning:"丰盛、母性、创造"},
+{name:"皇帝",meaning:"权威、稳定、领导"},
+{name:"教皇",meaning:"传统、信仰、学习"},
+{name:"恋人",meaning:"爱情、选择、关系"},
+{name:"战车",meaning:"胜利、决心、前进"},
+{name:"力量",meaning:"勇气、耐心、内在力量"},
+{name:"隐士",meaning:"反思、寻找内心答案"},
+{name:"命运之轮",meaning:"命运变化、转折"},
+{name:"正义",meaning:"公平、因果、平衡"}
 
-if(q){
-window.open(engine+encodeURIComponent(q))
+]
+
+let selected=[]
+
+const cardsDiv=document.getElementById("cards")
+
+/* 创建卡牌 */
+
+function createCards(){
+
+cardsDiv.innerHTML=""
+
+for(let i=0;i<3;i++){
+
+let card=document.createElement("div")
+card.className="card"
+
+card.innerHTML=`
+
+<div class="face back">✨</div>
+<div class="face front">
+<h3>?</h3>
+<p></p>
+</div>
+
+`
+
+card.onclick=()=>flipCard(card,i)
+
+cardsDiv.appendChild(card)
+
 }
 
 }
 
-/* ===== Tabs ===== */
+createCards()
 
-document.querySelectorAll(".tab").forEach(tab=>{
+/* 洗牌 */
 
-tab.onclick=()=>{
+function shuffle(){
 
-let parent=tab.parentElement.parentElement
+selected=[...tarot]
+.sort(()=>Math.random()-0.5)
+.slice(0,3)
 
-parent.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"))
-tab.classList.add("active")
+document.querySelectorAll(".card").forEach(c=>{
+c.classList.add("shuffle")
+c.classList.remove("flip")
+})
 
-parent.querySelectorAll(".tab-content").forEach(c=>c.style.display="none")
+document.getElementById("reading").innerText=""
 
-document.getElementById(tab.dataset.tab).style.display="grid"
+setTimeout(()=>{
+
+document.querySelectorAll(".card").forEach(c=>{
+c.classList.remove("shuffle")
+})
+
+},1000)
 
 }
 
-})
+/* 翻牌 */
 
-/* ===== Sidebar Toggle ===== */
+function flipCard(card,index){
 
-const sidebar=document.getElementById("sidebar")
+if(card.classList.contains("flip")) return
 
-document.getElementById("menuBtn").onclick=()=>{
+card.classList.add("flip")
 
-sidebar.classList.toggle("show")
+let data=selected[index]
+
+let front=card.querySelector(".front")
+
+front.innerHTML=`
+
+<h3>${data.name}</h3>
+<p>${data.meaning}</p>
+
+`
+
+showReading()
 
 }
 
-/* ===== Scroll Spy ===== */
+/* 显示解读 */
 
-const sections=document.querySelectorAll(".section")
-const navLinks=document.querySelectorAll(".nav a")
+function showReading(){
 
-window.addEventListener("scroll",()=>{
+let flipped=[...document.querySelectorAll(".card.flip")]
 
-let current=""
+if(flipped.length===3){
 
-sections.forEach(section=>{
+let text=`
+过去：${selected[0].name} — ${selected[0].meaning}
+\n现在：${selected[1].name} — ${selected[1].meaning}
+\n未来：${selected[2].name} — ${selected[2].meaning}
+`
 
-const top=section.offsetTop-120
+document.getElementById("reading").innerText=text
 
-if(scrollY>=top){
-current=section.getAttribute("id")
 }
 
-})
-
-navLinks.forEach(link=>{
-
-link.classList.remove("active")
-
-if(link.getAttribute("href")==="#"+current){
-link.classList.add("active")
 }
-
-})
-
-})
-
-/* ===== Smooth Scroll ===== */
-
-navLinks.forEach(link=>{
-
-link.addEventListener("click",function(e){
-
-e.preventDefault()
-
-let target=document.querySelector(this.getAttribute("href"))
-
-target.scrollIntoView({
-behavior:"smooth"
-})
-
-})
-
-})
 
 </script>
 
